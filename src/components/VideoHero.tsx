@@ -15,7 +15,7 @@ const VideoHero: React.FC = () => {
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     console.error('Video failed to load:', e);
-    console.error('Video source attempted:', '/tscc-splash-page-video.mp4');
+    console.error('Video source attempted:', '/NEW-TSCC-INRTO.mp4');
     setVideoError(true);
     setVideoLoaded(false);
   };
@@ -60,7 +60,7 @@ const VideoHero: React.FC = () => {
           onError={handleVideoError}
           aria-label="TSCC Hero Background Video"
         >
-          <source src="/tscc-splash-page-video.mp4" type="video/mp4" />
+          <source src="/NEW-TSCC-INRTO.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
