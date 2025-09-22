@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Splash from './components/Splash';
 import Navbar from './components/Navbar';
+import Footer4Col from './components/ui/footer-column';
 import Home from './pages/Home';
 import About from './pages/About';
 import Members from './pages/Members';
@@ -63,6 +64,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </motion.main>
+        <Footer4Col />
       </div>
     </Router>
   );
