@@ -45,7 +45,7 @@ const data = {
     name: 'TSCC',
     description:
       'Techno Smart Campus Club - Fostering innovative thinking and sustainable technological solutions for global environmental challenges.',
-    logo: '/TSCC Logo (1).png',
+    logo: '/TSCC-Logo.png',
   },
 };
 
