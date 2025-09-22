@@ -4,6 +4,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 const VideoHero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -12,8 +13,10 @@ const VideoHero: React.FC = () => {
     setVideoLoaded(true);
   };
 
-  const handleVideoError = () => {
-    console.warn('Video failed to load, using fallback background');
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.error('Video failed to load:', e);
+    setVideoError(true);
+    setVideoLoaded(false);
   };
 
   const scrollToNext = () => {
@@ -55,13 +58,24 @@ const VideoHero: React.FC = () => {
           onError={handleVideoError}
           aria-label="TSCC Hero Background Video"
         >
-          <source src="/tscc-splash-page.mp4" type="video/mp4" />
+          <source src="/tscc-splash-page video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
-        {/* Fallback background if video fails */}
-        {!videoLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-br from-olive via-forest to-brown" />
+        {/* Fallback background if video fails or is loading */}
+        {(!videoLoaded || videoError) && (
+          <div className="absolute inset-0 bg-gradient-to-br from-olive via-forest to-brown flex items-center justify-center">
+            <div className="text-center text-white">
+              <h1 className="text-4xl md:text-6xl font-bold mb-4">TSCC</h1>
+              <p className="text-xl md:text-2xl">Techno Smart Campus Club</p>
+              {!videoError && (
+                <div className="mt-4">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
+                  <p className="mt-2 text-sm">Loading video...</p>
+                </div>
+              )}
+            </div>
+          </div>
         )}
       </div>
 
