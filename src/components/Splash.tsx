@@ -49,6 +49,7 @@ const Splash: React.FC<SplashProps> = ({ onEnterSite }) => {
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     console.error('Video failed to load:', e);
+    console.error('Video source attempted:', '/tscc-splash-page-video.mp4');
     setVideoError(true);
     setShowSkip(true);
     setShowButton(true);
@@ -90,13 +91,15 @@ const Splash: React.FC<SplashProps> = ({ onEnterSite }) => {
             autoPlay
             muted
             playsInline
+            preload="auto"
+            crossOrigin="anonymous"
             onLoadedData={handleVideoLoad}
             onError={handleVideoError}
             onCanPlayThrough={handleVideoLoad}
             onEnded={handleVideoEnd}
             aria-label="TSCC Splash Video - Techno Smart Campus Club Introduction"
           >
-            <source src="/tscc-splash-page video.mp4" type="video/mp4" />
+            <source src="/tscc-splash-page-video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (
