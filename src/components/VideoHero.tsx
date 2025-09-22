@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const VideoHero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -90,23 +90,6 @@ const VideoHero: React.FC = () => {
           transition={{ duration: 0.8 }}
         >
 
-          {/* Scroll indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col items-center gap-2"
-          >
-            <motion.button
-              onClick={scrollToNext}
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-white/60 hover:text-white transition-colors duration-300"
-              aria-label="Scroll down to see more content"
-            >
-              <ChevronDown className="w-6 h-6" />
-            </motion.button>
-          </motion.div>
         </motion.div>
       </div>
     </section>

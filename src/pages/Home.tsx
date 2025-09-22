@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import { ArrowRight, Target, Users, Lightbulb, Globe, Calendar, ChevronDown } from 'lucide-react';
+import { ArrowRight, Target, Users, Lightbulb, Globe, Calendar } from 'lucide-react';
 import VideoHero from '../components/VideoHero';
 import "../index.css";
 
@@ -580,12 +580,6 @@ function Home() {
               <span className="font-sans-body text-sm">
                 {isAutoPlaying ? 'Cards auto-advance every 4 seconds' : 'Hover over cards to pause auto-play'}
               </span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ChevronDown className="w-6 h-6" />
-              </motion.div>
             </div>
           </motion.div>
 
