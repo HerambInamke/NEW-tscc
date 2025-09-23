@@ -7,7 +7,11 @@ The website uses a local video file that needs to be included in your deployment
 ### Video File Location
 - **Source**: `public/NEW-TSCC-INRTO.mp4`
 - **Build Output**: `dist/NEW-TSCC-INRTO.mp4`
-- **Web Path**: `/NEW-TSCC-INRTO.mp4`
+- **Web Paths**: The app tries multiple paths automatically:
+  - `/NEW-TSCC-INRTO.mp4` (primary)
+  - `./NEW-TSCC-INRTO.mp4` (relative)
+  - `NEW-TSCC-INRTO.mp4` (filename only)
+  - `/public/NEW-TSCC-INRTO.mp4` (with public folder)
 
 ### Deployment Checklist
 
@@ -31,10 +35,18 @@ The website uses a local video file that needs to be included in your deployment
 ### Troubleshooting
 
 If video doesn't load:
-1. Check browser console for errors
+1. Check browser console for errors - the app will show which paths it tried
 2. Verify video file is accessible at the correct URL
 3. Ensure server supports video streaming
 4. Check file permissions on the server
+5. The app automatically tries multiple video paths, so check console logs for "Video found at:" messages
+
+### Production Video Loading Features
+
+- **Automatic Path Detection**: Checks multiple video paths on load
+- **Fallback System**: Tries different paths if one fails
+- **Error Recovery**: Automatically retries with different sources
+- **Console Logging**: Detailed logs for debugging video loading issues
 
 ## Build Commands
 

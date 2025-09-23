@@ -6,13 +6,49 @@ const VideoHero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [currentVideoSrc, setCurrentVideoSrc] = useState('/NEW-TSCC-INRTO.mp4');
+  const [videoSources, setVideoSources] = useState([
+    '/NEW-TSCC-INRTO.mp4',
+    './NEW-TSCC-INRTO.mp4',
+    'NEW-TSCC-INRTO.mp4',
+    '/public/NEW-TSCC-INRTO.mp4'
+  ]);
+  const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Handle video loading
   const handleVideoLoad = () => {
+    console.log('Video loaded successfully:', currentVideoSrc);
     setVideoLoaded(true);
   };
+
+  // Update video source when currentVideoSrc changes
+  useEffect(() => {
+    if (videoRef.current && currentVideoSrc) {
+      videoRef.current.load();
+    }
+  }, [currentVideoSrc]);
+
+  // Check video availability on component mount
+  useEffect(() => {
+    const checkVideoAvailability = async () => {
+      for (let i = 0; i < videoSources.length; i++) {
+        try {
+          const response = await fetch(videoSources[i], { method: 'HEAD' });
+          if (response.ok) {
+            console.log('Video found at:', videoSources[i]);
+            setCurrentVideoSrc(videoSources[i]);
+            setCurrentSourceIndex(i);
+            break;
+          }
+        } catch (error) {
+          console.log('Video not found at:', videoSources[i]);
+        }
+      }
+    };
+
+    checkVideoAvailability();
+  }, []);
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
     const target = e.target as HTMLVideoElement;
@@ -26,18 +62,16 @@ const VideoHero: React.FC = () => {
       currentSrc: target.currentSrc
     });
     
-    // Try alternative video sources
-    if (currentVideoSrc === '/NEW-TSCC-INRTO.mp4') {
-      console.log('Trying alternative video source...');
-      setCurrentVideoSrc('./NEW-TSCC-INRTO.mp4');
-      setVideoError(false);
-      setVideoLoaded(false);
-    } else if (currentVideoSrc === './NEW-TSCC-INRTO.mp4') {
-      console.log('Trying absolute path...');
-      setCurrentVideoSrc('/NEW-TSCC-INRTO.mp4');
+    // Try next video source
+    const nextIndex = currentSourceIndex + 1;
+    if (nextIndex < videoSources.length) {
+      console.log(`Trying video source ${nextIndex + 1}/${videoSources.length}:`, videoSources[nextIndex]);
+      setCurrentSourceIndex(nextIndex);
+      setCurrentVideoSrc(videoSources[nextIndex]);
       setVideoError(false);
       setVideoLoaded(false);
     } else {
+      console.error('All video sources failed to load');
       setVideoError(true);
       setVideoLoaded(false);
     }
@@ -83,7 +117,13 @@ const VideoHero: React.FC = () => {
           onError={handleVideoError}
           aria-label="TSCC Hero Background Video"
         >
-          <source src={currentVideoSrc} type="video/mp4" />
+          {videoSources.map((src, index) => (
+            <source 
+              key={src} 
+              src={src} 
+              type="video/mp4" 
+            />
+          ))}
           Your browser does not support the video tag.
         </video>
         

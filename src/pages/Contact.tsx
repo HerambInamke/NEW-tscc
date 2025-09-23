@@ -68,9 +68,7 @@ const Contact: React.FC = () => {
   const socialLinks = [
     { name: 'Instagram', url: '#', color: 'hover:text-pink-400' },
     { name: 'LinkedIn', url: '#', color: 'hover:text-blue-400' },
-    { name: 'Twitter', url: '#', color: 'hover:text-cyan-400' },
-    { name: 'GitHub', url: '#', color: 'hover:text-gray-300' },
-    { name: 'Discord', url: '#', color: 'hover:text-indigo-400' },
+    { name: 'WhatsApp', url: '#', color: 'hover:text-green-400' },
     { name: 'YouTube', url: '#', color: 'hover:text-red-400' }
   ];
 
