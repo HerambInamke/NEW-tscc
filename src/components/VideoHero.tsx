@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 const VideoHero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
-  const [currentVideoSrc, setCurrentVideoSrc] = useState('/NEW-TSCC-INRTO.mp4');
+  const [currentVideoSrc, setCurrentVideoSrc] = useState('/NEW-TSCC-INTRO.mp4');
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -27,9 +27,9 @@ const VideoHero: React.FC = () => {
     });
     
     // Try alternative video sources
-    if (currentVideoSrc === '/NEW-TSCC-INRTO.mp4') {
+    if (currentVideoSrc === '/NEW-TSCC-INTRO.mp4') {
       console.log('Trying alternative video source...');
-      setCurrentVideoSrc('./NEW-TSCC-INRTO.mp4');
+      setCurrentVideoSrc('./NEW-TSCC-INTRO.mp4');
       setVideoError(false);
       setVideoLoaded(false);
     } else {
