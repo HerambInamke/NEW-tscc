@@ -30,7 +30,7 @@ const Feedback: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-sans-body text-xl text-ink max-w-4xl mx-auto leading-relaxed"
           >
-            Help us improve by sharing your thoughts and experiences with TSC. 
+            Help us improve by sharing your thoughts and experiences with TSCC. 
             Your feedback is invaluable in shaping our community and initiatives.
           </motion.p>
         </div>

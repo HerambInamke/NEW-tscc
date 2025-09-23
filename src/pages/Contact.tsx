@@ -66,10 +66,8 @@ const Contact: React.FC = () => {
   ];
 
   const socialLinks = [
-    { name: 'Instagram', url: '#', color: 'hover:text-pink-400' },
-    { name: 'LinkedIn', url: '#', color: 'hover:text-blue-400' },
-    { name: 'WhatsApp', url: '#', color: 'hover:text-green-400' },
-    { name: 'YouTube', url: '#', color: 'hover:text-red-400' }
+    { name: 'Instagram', url: 'https://www.instagram.com/techno_smart_campus_club/#', color: 'hover:text-pink-400' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/company/techno-smart-campus-club/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BTBFzHEdmTz2MwwFAxpzDRA%3D%3D', color: 'hover:text-blue-400' },
   ];
 
   return (

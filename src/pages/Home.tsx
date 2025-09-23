@@ -253,22 +253,22 @@ function Home() {
   // Recent activities
   const activities = [
     {
-      title: "Green Tech Hackathon 2024",
-      description: "48-hour hackathon with 200+ participants developing sustainable technology solutions",
-      date: "March 2024",
-      color: "text-olive"
-    },
-    {
-      title: "Solar Panel Installation",
-      description: "Campus-wide initiative installing 50 solar panels, reducing carbon footprint by 30%",
-      date: "February 2024",
+      title:"ISRO Visit",
+      date:'2025-01-08',
+      description:'A guided tour of ISRO\'s facilities, showcasing India\'s advancements in space technology and sustainable innovations.',
       color: "text-forest"
     },
     {
-      title: "AI for Climate Workshop",
-      description: "Workshops on using artificial intelligence for climate change mitigation strategies",
-      date: "January 2024",
-      color: "text-muted-gold"
+      title:'Orphanage Visit',
+      date: '2025-03-29',
+      description: 'Spending quality time with children at a local orphanage, providing support and sharing knowledge on sustainable practices.',
+      color: "text-forest"
+    },
+    {
+      title: 'Ewaste Collection Drive',
+      date: '2025-03-28',
+      description:'Collecting E-waste from our campus and having an interactive session on E-waste with external mentor',
+      color: "text-forest"
     }
   ];
   

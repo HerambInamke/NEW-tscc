@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Leaf, Zap, Target, Users, Award, Globe, Calendar, TrendingUp, Users2, Handshake } from 'lucide-react';
+import { Leaf, Zap, Target, Users, Award, Globe, TrendingUp, Users2, Handshake } from 'lucide-react';
 
 const About: React.FC = () => {
   const values = [
