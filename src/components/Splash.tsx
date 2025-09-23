@@ -10,18 +10,19 @@ const Splash: React.FC<SplashProps> = ({ onEnterSite }) => {
   const [videoError, setVideoError] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
+  const [currentVideoSrc, setCurrentVideoSrc] = useState('/NEW-TSCC-INRTO.mp4');
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // 5-second delay before showing Enter Site button and auto-redirect
+  // 9-second video duration with proper timing
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowButton(true);
-    }, 5000);
+    }, 9000);
 
-    // Auto-redirect after 5 seconds
+    // Auto-redirect after 9 seconds
     const redirectTimer = setTimeout(() => {
       onEnterSite();
-    }, 5000);
+    }, 10000);
 
     // Show skip option after 3 seconds if video hasn't loaded
     const skipTimer = setTimeout(() => {
@@ -43,16 +44,45 @@ const Splash: React.FC<SplashProps> = ({ onEnterSite }) => {
   };
 
   const handleVideoEnd = () => {
-    // If video ends before 5 seconds, show button immediately
+    // If video ends before 9 seconds, show button immediately
     setShowButton(true);
   };
 
+  // Control video duration to exactly 9 seconds
+  useEffect(() => {
+    if (videoRef.current && videoLoaded) {
+      const video = videoRef.current;
+      
+      // Set video to loop if it's shorter than 9 seconds
+      if (video.duration < 9) {
+        video.loop = true;
+      }
+    }
+  }, [videoLoaded]);
+
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const target = e.target as HTMLVideoElement;
     console.error('Video failed to load:', e);
-    console.error('Video source attempted:', '/NEW-TSCC-INRTO.mp4');
-    setVideoError(true);
-    setShowSkip(true);
-    setShowButton(true);
+    console.error('Video source attempted:', currentVideoSrc);
+    console.error('Video error details:', {
+      error: target.error,
+      networkState: target.networkState,
+      readyState: target.readyState,
+      src: target.src,
+      currentSrc: target.currentSrc
+    });
+    
+    // Try alternative video sources
+    if (currentVideoSrc === '/NEW-TSCC-INRTO.mp4') {
+      console.log('Trying alternative video source...');
+      setCurrentVideoSrc('./NEW-TSCC-INRTO.mp4');
+      setVideoError(false);
+      setVideoLoaded(false);
+    } else {
+      setVideoError(true);
+      setShowSkip(true);
+      setShowButton(true);
+    }
   };
 
   const handleSkip = () => {
@@ -91,15 +121,23 @@ const Splash: React.FC<SplashProps> = ({ onEnterSite }) => {
             autoPlay
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             crossOrigin="anonymous"
             onLoadedData={handleVideoLoad}
             onError={handleVideoError}
             onCanPlayThrough={handleVideoLoad}
             onEnded={handleVideoEnd}
+            onTimeUpdate={(e) => {
+              const video = e.target as HTMLVideoElement;
+              // Stop video at exactly 9 seconds
+              if (video.currentTime >= 9) {
+                video.pause();
+                setShowButton(true);
+              }
+            }}
             aria-label="TSCC Splash Video - Techno Smart Campus Club Introduction"
           >
-            <source src="/NEW-TSCC-INRTO.mp4" type="video/mp4" />
+            <source src={currentVideoSrc} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (

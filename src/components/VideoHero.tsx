@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 const VideoHero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [currentVideoSrc, setCurrentVideoSrc] = useState('/NEW-TSCC-INRTO.mp4');
   const videoRef = useRef<HTMLVideoElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -14,10 +15,27 @@ const VideoHero: React.FC = () => {
   };
 
   const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const target = e.target as HTMLVideoElement;
     console.error('Video failed to load:', e);
-    console.error('Video source attempted:', '/NEW-TSCC-INRTO.mp4');
-    setVideoError(true);
-    setVideoLoaded(false);
+    console.error('Video source attempted:', currentVideoSrc);
+    console.error('Video error details:', {
+      error: target.error,
+      networkState: target.networkState,
+      readyState: target.readyState,
+      src: target.src,
+      currentSrc: target.currentSrc
+    });
+    
+    // Try alternative video sources
+    if (currentVideoSrc === '/NEW-TSCC-INRTO.mp4') {
+      console.log('Trying alternative video source...');
+      setCurrentVideoSrc('./NEW-TSCC-INRTO.mp4');
+      setVideoError(false);
+      setVideoLoaded(false);
+    } else {
+      setVideoError(true);
+      setVideoLoaded(false);
+    }
   };
 
   const scrollToNext = () => {
@@ -54,13 +72,14 @@ const VideoHero: React.FC = () => {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           crossOrigin="anonymous"
           onLoadedData={handleVideoLoad}
+          onCanPlayThrough={handleVideoLoad}
           onError={handleVideoError}
           aria-label="TSCC Hero Background Video"
         >
-          <source src="/NEW-TSCC-INRTO.mp4" type="video/mp4" />
+          <source src={currentVideoSrc} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         
