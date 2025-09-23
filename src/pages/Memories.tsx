@@ -11,7 +11,7 @@ const Memories: React.FC = () => {
       date: '2024-11-18',
       category: 'Induction',
       participants: '150+',
-      image: 'public/Induction Ceremony.jpg',
+      image: '/Induction Ceremony.jpg',
       description: 'Welcoming new members to the TSCC family and introducing them to our mission and values.'
     },
     {
@@ -20,7 +20,7 @@ const Memories: React.FC = () => {
       date:'2025-01-08',
       category:'Exhibition',
       participants:'50+',
-      image:'public/ISRO visit1.jpg',
+      image:'/ISRO visit1.jpg',
       description:'A guided tour of ISRO\'s facilities, showcasing India\'s advancements in space technology and sustainable innovations.'
     },
     {
@@ -29,7 +29,7 @@ const Memories: React.FC = () => {
       date:'2025-01-08',
       category:'Field Visit',
       participants:'50+',
-      image:'public/Amul visit.jpg',
+      image:'/Amul visit.jpg',
       description:'Exploring the operations of Amul, India\'s largest dairy cooperative, and learning about sustainable dairy practices.'
     },
     {
@@ -38,7 +38,7 @@ const Memories: React.FC = () => {
       date:'2025-01-10',
       category:'Field Visit',
       participants:'50+',
-      image:'public/Statue.jpg',
+      image:'/Statue.jpg',
       description:'A visit to the world\'s tallest statue, learning about its significance and the sustainable practices involved in its construction.'
     },
     {
@@ -47,7 +47,7 @@ const Memories: React.FC = () => {
       date: '2025-01-09',
       category: 'Field Visit',
       participants: '50+',
-      image: 'public/Einfochips.jpg',
+      image: '/Einfochips.jpg',
       description: 'A tour of Einfochips, exploring their innovative solutions in electronics and sustainable technology practices.'
     },
     {
@@ -56,7 +56,7 @@ const Memories: React.FC = () => {
       date: '2025-03-29',
       category: 'Social Service',
       participants: '30+',
-      image: 'public/orphanage_visit.jpg',
+      image: '/orphanage_visit.jpg',
       description: 'Spending quality time with children at a local orphanage, providing support and sharing knowledge on sustainable practices.'
     },
     {
@@ -65,7 +65,7 @@ const Memories: React.FC = () => {
       date: '2025-03-28',
       category: 'Sustainability',
       participants: '40+',
-      image:'public/EWASTE.jpg',
+      image:'/EWASTE.jpg',
       description:'Collecting E-waste from our campus and having an interactive session on E-waste with external mentor'
     },
     {
@@ -74,7 +74,7 @@ const Memories: React.FC = () => {
       date: '2025-03-21',
       category: 'Field Visit',
       participants: '50+',
-      image: 'public/visit3.jpeg',
+      image: '/visit3.jpeg',
       description: 'A visit to Ralegaon Siddhi, a model village in India known for its sustainable practices and community-driven development.'
     }
   ];
