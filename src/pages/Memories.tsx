@@ -1,91 +1,81 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Calendar, Users, Award, Clock } from 'lucide-react';
-
+import { X, ChevronLeft, ChevronRight, Calendar, Users,  Clock } from 'lucide-react';
 const Memories: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const memories = [
     {
       id: 1,
-      title: 'Green Tech Hackathon 2023',
-      date: '2023-11-20',
-      category: 'Hackathon',
-      participants: '200+',
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Our flagship hackathon brought together innovative minds to solve environmental challenges.'
-    },
-    {
-      id: 2,
-      title: 'Solar Panel Installation',
-      date: '2023-09-15',
-      category: 'Project',
-      participants: '50+',
-      image: 'https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Successfully installed 25 solar panels across campus buildings.'
-    },
-    {
-      id: 3,
-      title: 'Team Building Workshop',
-      date: '2023-08-10',
-      category: 'Workshop',
-      participants: '80+',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Strengthening bonds and building collaborative skills among team members.'
-    },
-    {
-      id: 4,
-      title: 'Industry Expert Talk',
-      date: '2023-07-22',
-      category: 'Seminar',
+      title: 'Induction Ceremony',
+      date: '2024-11-18',
+      category: 'Induction',
       participants: '150+',
-      image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Inspiring session with leading environmental technology experts.'
+      image: 'public/Induction Ceremony.jpg',
+      description: 'Welcoming new members to the TSCC family and introducing them to our mission and values.'
     },
     {
-      id: 5,
-      title: 'Smart Campus Demo',
-      date: '2023-06-05',
-      category: 'Demo',
-      participants: '100+',
-      image: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Showcasing our IoT-based smart campus solutions to the university community.'
+      id:2,
+      title:"ISRO Visit",
+      date:'2025-01-08',
+      category:'Exhibition',
+      participants:'50+',
+      image:'public/ISRO visit1.jpg',
+      description:'A guided tour of ISRO\'s facilities, showcasing India\'s advancements in space technology and sustainable innovations.'
+    },
+    {
+      id:3,
+      title:'Amul Factory Visit',
+      date:'2025-01-08',
+      category:'Field Visit',
+      participants:'50+',
+      image:'public/Amul visit.jpg',
+      description:'Exploring the operations of Amul, India\'s largest dairy cooperative, and learning about sustainable dairy practices.'
+    },
+    {
+      id:4,
+      title:'Statue of Unity Visit',
+      date:'2025-01-10',
+      category:'Field Visit',
+      participants:'50+',
+      image:'public/Statue.jpg',
+      description:'A visit to the world\'s tallest statue, learning about its significance and the sustainable practices involved in its construction.'
+    },
+    {
+      id:5,
+      title: 'Einfochips Visit',
+      date: '2025-01-09',
+      category: 'Field Visit',
+      participants: '50+',
+      image: 'public/Einfochips.jpg',
+      description: 'A tour of Einfochips, exploring their innovative solutions in electronics and sustainable technology practices.'
     },
     {
       id: 6,
-      title: 'Environmental Cleanup Drive',
-      date: '2023-05-18',
-      category: 'Community',
-      participants: '120+',
-      image: 'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Community initiative to clean and green our local environment.'
+      title:'Orphanage Visit',
+      date: '2025-03-29',
+      category: 'Social Service',
+      participants: '30+',
+      image: 'public/orphanage_visit.jpg',
+      description: 'Spending quality time with children at a local orphanage, providing support and sharing knowledge on sustainable practices.'
     },
     {
       id: 7,
-      title: 'Innovation Fair 2023',
-      date: '2023-04-12',
-      category: 'Exhibition',
-      participants: '300+',
-      image: 'https://images.pexels.com/photos/3861959/pexels-photo-3861959.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Annual showcase of student innovations in sustainable technology.'
+      title: 'Ewaste Collection Drive',
+      date: '2025-03-28',
+      category: 'Sustainability',
+      participants: '40+',
+      image:'public/EWASTE.jpg',
+      description:'Collecting E-waste from our campus and having an interactive session on E-waste with external mentor'
     },
     {
       id: 8,
-      title: 'Coding Bootcamp',
-      date: '2023-03-28',
-      category: 'Workshop',
-      participants: '60+',
-      image: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Intensive coding bootcamp focused on green tech applications.'
-    },
-    {
-      id: 9,
-      title: 'Award Ceremony',
-      date: '2023-02-14',
-      category: 'Awards',
-      participants: '200+',
-      image: 'https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
-      description: 'Recognizing outstanding contributions to sustainable innovation.'
+      title:'Ralegaon Siddhi Visit',
+      date: '2025-03-21',
+      category: 'Field Visit',
+      participants: '50+',
+      image: 'public/visit3.jpeg',
+      description: 'A visit to Ralegaon Siddhi, a model village in India known for its sustainable practices and community-driven development.'
     }
   ];
 
