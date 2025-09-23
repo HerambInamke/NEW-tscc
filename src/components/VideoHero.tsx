@@ -32,19 +32,51 @@ const VideoHero: React.FC = () => {
   // Check video availability on component mount
   useEffect(() => {
     const checkVideoAvailability = async () => {
+      console.log('Checking video availability...');
+      
       for (let i = 0; i < videoSources.length; i++) {
         try {
-          const response = await fetch(videoSources[i], { method: 'HEAD' });
-          if (response.ok) {
-            console.log('Video found at:', videoSources[i]);
-            setCurrentVideoSrc(videoSources[i]);
-            setCurrentSourceIndex(i);
-            break;
+          console.log(`Checking video source ${i + 1}/${videoSources.length}:`, videoSources[i]);
+          
+          // For local files, try a simple fetch
+          if (videoSources[i].startsWith('http')) {
+            // For external URLs, use HEAD request
+            const response = await fetch(videoSources[i], { 
+              method: 'HEAD',
+              mode: 'cors'
+            });
+            if (response.ok) {
+              console.log('✅ Video found at:', videoSources[i]);
+              setCurrentVideoSrc(videoSources[i]);
+              setCurrentSourceIndex(i);
+              return;
+            }
+          } else {
+            // For local files, try to load the video element
+            const testVideo = document.createElement('video');
+            testVideo.preload = 'metadata';
+            testVideo.crossOrigin = 'anonymous';
+            
+            const loadPromise = new Promise((resolve, reject) => {
+              testVideo.onloadedmetadata = () => resolve(true);
+              testVideo.onerror = () => reject(false);
+              testVideo.src = videoSources[i];
+            });
+            
+            const result = await loadPromise;
+            if (result) {
+              console.log('✅ Video found at:', videoSources[i]);
+              setCurrentVideoSrc(videoSources[i]);
+              setCurrentSourceIndex(i);
+              return;
+            }
           }
         } catch (error) {
-          console.log('Video not found at:', videoSources[i]);
+          console.log('❌ Video not found at:', videoSources[i], error);
         }
       }
+      
+      console.log('⚠️ No working video source found, will try fallback system');
     };
 
     checkVideoAvailability();
@@ -131,14 +163,28 @@ const VideoHero: React.FC = () => {
         {(!videoLoaded || videoError) && (
           <div className="absolute inset-0 bg-gradient-to-br from-olive via-forest to-brown flex items-center justify-center">
             <div className="text-center text-white">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4">TSCC</h1>
-              <p className="text-xl md:text-2xl">Techno Smart Campus Club</p>
-              {!videoError && (
-                <div className="mt-4">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
-                  <p className="mt-2 text-sm">Loading video...</p>
-                </div>
-              )}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h1 className="text-4xl md:text-6xl font-bold mb-4 font-serif-heading">TSCC</h1>
+                <p className="text-xl md:text-2xl font-sans-body mb-6">Techno Smart Campus Club</p>
+                <p className="text-lg md:text-xl font-sans-body mb-8 opacity-90">
+                  MIT ADT University
+                </p>
+                {!videoError && (
+                  <div className="mt-4">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto"></div>
+                    <p className="mt-2 text-sm">Loading video...</p>
+                  </div>
+                )}
+                {videoError && (
+                  <div className="mt-4">
+                    <p className="text-sm opacity-75">Welcome to our community</p>
+                  </div>
+                )}
+              </motion.div>
             </div>
           </div>
         )}
