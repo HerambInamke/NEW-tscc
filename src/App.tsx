@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Splash from './components/Splash';
 import Navbar from './components/Navbar';
 import Footer4Col from './components/ui/footer-column';
 import Home from './pages/Home';
@@ -15,12 +14,7 @@ import Feedback from './pages/Feedback';
 import Contact from './pages/Contact';
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
-
-  const handleEnterSite = () => {
-    setShowSplash(false);
-  };
 
   // Handle scroll detection for navbar
   useEffect(() => {
@@ -38,10 +32,6 @@ function App() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  if (showSplash) {
-    return <Splash onEnterSite={handleEnterSite} />;
-  }
 
   return (
     <Router>
