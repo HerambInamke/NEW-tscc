@@ -88,7 +88,7 @@ const Members: React.FC = () => {
       role: 'Technical Mentor',
       image: '/rajani mam.jpg',
       expertise: 'Cloud Computing',
-      department: 'CSE-CLoud Computing',
+      department: 'CSE-Cloud Computing',
       bio: 'Associate Professor at MIT ADT University | AWS Certified | Azure Certified | Trainer | Mentor',
       achievements: ['IEEE Senior Member', 'Smart City Project Lead', 'Developed 5 patented IoT solutions']
     }
