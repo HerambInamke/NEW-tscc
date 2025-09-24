@@ -98,7 +98,7 @@ const Members: React.FC = () => {
       expertise: 'Cloud Computing',
       department: 'CSE-Cloud Computing',
       bio: 'Associate Professor at MIT ADT University | AWS Certified | Azure Certified | Trainer | Mentor',
-      achievements: ['IEEE Senior Member', 'Smart City Project Lead', 'Developed 5 patented IoT solutions']
+      achievements: ['23 years of teaching experience at UG,Pg Level','15 years of experience at the administrative established Cloud Computing at university powered by AWS']
     }
   ];
 
