@@ -79,6 +79,14 @@ const Members: React.FC = () => {
       expertise: 'DevOps and Cloud Computing',
       achievements: ['Investment and Finance ','NCC'],
       currentPosition: 'Advisory Board Member at TSCC'
+    },
+    {
+      name: 'Reva Raspaile',
+      role: 'Former Design Lead',
+      image: '/reva.jpg',
+      expertise: 'Software program developer',
+      achievements: ['A tech-driven individual with strong skills in problem-solving'],
+      currentPosition: 'Advisory Board Member at TSCC'
     }
   ];
 
