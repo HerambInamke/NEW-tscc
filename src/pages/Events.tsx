@@ -82,28 +82,28 @@ const Events: React.FC = () => {
 
   const pastEvents = [
     {
-      title: 'Green Tech Expo 2023',
-      date: '2023-11-20',
-      attendees: '800+',
-      description: 'Showcased 50+ sustainable technology projects from students and industry partners.',
-      achievements: ['Best Innovation Award', '15 Startup Pitches', '5 Industry Partnerships'],
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
+      title: 'ISRO Visit',
+      date: '2025-01-08',
+      attendees: '50+',
+      description: 'A guided tour of ISRO\'s facilities, showcasing India\'s advancements in space technology and sustainable innovations.',
+      achievements: ['Successful Tour', 'Networking with ISRO Scientists', 'Inspiration for Future Projects'],
+      image: '/ISRO visit1.jpg'
     },
     {
-      title: 'Smart Campus Challenge',
-      date: '2023-09-15',
-      attendees: '150+',
-      description: 'Students competed to design IoT solutions for smart campus infrastructure.',
-      achievements: ['12 Teams Participated', 'Smart Energy Solution Winner', 'Industry Mentorship'],
-      image: 'https://images.pexels.com/photos/3861959/pexels-photo-3861959.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
+      title: 'Ralegan Siddhi Visit',
+      date: '2025-03-21',
+      attendees: '50+',
+      description: 'A visit to Ralegaon Siddhi, a model village in India known for its sustainable practices and community-driven development.',
+      achievements: ['Learned Sustainable Practices', 'Community Engagement', 'Environmental Awareness'],
+      image: '/visit3.jpeg'
     },
     {
-      title: 'Environmental Tech Talk Series',
-      date: '2023-08-10',
-      attendees: '300+',
-      description: 'Monthly talk series featuring environmental technology experts and researchers.',
-      achievements: ['8 Expert Speakers', 'Live Streaming', 'Q&A Sessions'],
-      image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&dpr=1'
+      title: 'EWaste Drive',
+      date: '2025-03-28',
+      attendees: '50+',
+      description: 'Collecting E-waste from our campus and having an interactive session on E-waste with external mentor',
+      achievements: ['Collected 10kg+ E-waste', 'Conducted Awareness Sessions'],
+      image: '/EWASTE.jpg'
     }
   ];
 
