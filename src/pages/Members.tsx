@@ -10,7 +10,7 @@ const Members: React.FC = () => {
       image: '/raj.jpg',
       expertise: 'Cybersecurity',
       bio: 'Leading TSCC with a vision for sustainable tech innovation. Expert in machine learning applications for environmental solutions.',
-      achievements: ['Social Activist','Led Social Campaigns'],
+      achievements: ['NSS','Led Social Campaigns'],
       social: { email: 'rajsharma.education1@gmail.com', linkedin: 'https://www.linkedin.com/in/raj-sharma-1ba65526a/overlay/about-this-profile/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BkHK%2B%2BNdPSreKaRA05MVTKw%3D%3D', github: '' }
     },
     {
