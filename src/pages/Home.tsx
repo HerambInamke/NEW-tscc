@@ -621,14 +621,17 @@ function Home() {
               Join our community of innovators and help create a more sustainable future through technology.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd77ZUOH5Xp3yRpF96H-ZxYjG35aCWWEF3I0Ie0nRSn3X5ynw/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group px-8 py-4 bg-gradient-to-r from-olive to-forest text-paper font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
               >
                 Join TSCC Today
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              </motion.a>
               
               <motion.button
                 whileHover={{ scale: 1.05 }}

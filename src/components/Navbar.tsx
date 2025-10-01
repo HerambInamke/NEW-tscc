@@ -35,7 +35,7 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled = false }) => {
     { name: 'Events', path: '/events' },
     { name: 'Articles', path: '/articles' },
     { name: 'Memories', path: '/memories' },
-    { name: 'Feedback', path: '/feedback' },
+    { name: 'Recruitment', path: '/recruitment' },
     { name: 'Contact Us', path: '/contact' },
   ];
 

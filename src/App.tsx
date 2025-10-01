@@ -50,7 +50,7 @@ function App() {
             <Route path="/articles" element={<Articles />} />
             <Route path="/memories" element={<Memories />} />
             <Route path="/apply" element={<Apply />} />
-            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/recruitment" element={<Feedback />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </motion.main>
