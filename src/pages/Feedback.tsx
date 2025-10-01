@@ -31,7 +31,7 @@ const Feedback: React.FC = () => {
             className="font-sans-body text-xl text-ink max-w-4xl mx-auto leading-relaxed"
           >
             Join Techno Smart Campus Club and help drive innovation, sustainability, and tech-enabled impact on campus.
-            We welcome applicants across content, promotion & sponsorship, social media (photography), and management.
+            We welcome applicants across content, promotion & sponsorship, social media (Photography, Video, Editor), and management.
           </motion.p>
         </div>
       </motion.section>
@@ -75,7 +75,7 @@ const Feedback: React.FC = () => {
                 Roles Available
               </h3>
               <p className="font-sans-body text-ink mb-6 leading-relaxed">
-                We’re looking for passionate members across the following teams: Content, Promotion & Sponsorship, Social Media (Photography), and Management.
+                We’re looking for passionate members across the following teams: Content, Promotion & Sponsorship, Social Media (Photography, Video, Editor), and Management.
               </p>
               
               <div className="space-y-4">
@@ -98,8 +98,8 @@ const Feedback: React.FC = () => {
                 <div className="flex items-start">
                   <div className="w-3 h-3 rounded-full bg-brown mt-1.5 mr-3"></div>
                   <div>
-                    <h4 className="font-serif-heading font-semibold text-forest">Social Media (Photography)</h4>
-                    <p className="font-sans-body text-technical-gray">Capture moments and build our visual storytelling across platforms.</p>
+                    <h4 className="font-serif-heading font-semibold text-forest">Social Media (Photography, Video, Editor)</h4>
+                    <p className="font-sans-body text-technical-gray">Capture moments, edit visuals, and build our storytelling across platforms.</p>
                   </div>
                 </div>
 
