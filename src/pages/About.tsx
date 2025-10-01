@@ -279,13 +279,16 @@ const About: React.FC = () => {
               Be part of a community that's making a real difference in creating a sustainable future through technology.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd77ZUOH5Xp3yRpF96H-ZxYjG35aCWWEF3I0Ie0nRSn3X5ynw/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-gradient-to-r from-olive to-forest text-paper font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 Become a Member
-              </motion.button>
+              </motion.a>
               
               <motion.button
                 whileHover={{ scale: 1.05 }}

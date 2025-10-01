@@ -37,8 +37,8 @@ const data = {
     livechat: '/contact',
   },
   contact: {
-    email: 'contact@tscc.com',
-    phone: '+91 9876543210',
+    email: 'technosmartcampusclub@gmail.com',
+    phone: '93254 46359',
     address: 'MIT, Pune, Maharashtra, India',
   },
   company: {
@@ -79,8 +79,8 @@ const helpfulLinks = [
 ];
 
 const contactInfo = [
-  { icon: Mail, text: data.contact.email },
-  { icon: Phone, text: data.contact.phone },
+  { icon: Mail, text: data.contact.email, isEmail: true },
+  { icon: Phone, text: data.contact.phone, isPhone: true },
   { icon: MapPin, text: data.contact.address, isAddress: true },
 ];
 
@@ -186,11 +186,19 @@ export default function Footer4Col() {
             <div className="text-center sm:text-left">
               <p className="text-lg font-medium font-serif-heading text-forest">Contact Us</p>
               <ul className="mt-8 space-y-4 text-sm">
-                {contactInfo.map(({ icon: Icon, text, isAddress }) => (
+              {contactInfo.map(({ icon: Icon, text, isAddress, isPhone, isEmail }) => (
                   <li key={text}>
                     <a
                       className="flex items-center justify-center gap-1.5 sm:justify-start hover:text-forest transition-colors duration-300"
-                      href={isAddress ? '#' : `mailto:${text}`}
+                    href={
+                      isAddress
+                        ? '#'
+                        : isPhone
+                        ? `tel:${String(text).replace(/\s+/g, '')}`
+                        : isEmail
+                        ? `mailto:${text}`
+                        : '#'
+                    }
                     >
                       <Icon className="text-forest size-5 shrink-0 shadow-sm" />
                       {isAddress ? (

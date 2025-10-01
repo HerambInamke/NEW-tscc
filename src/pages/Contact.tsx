@@ -38,14 +38,14 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      value: 'info@technosmartcampus.club',
+      value: 'technosmartcampusclub@gmail.com',
       description: 'Get in touch for any inquiries',
       color: 'text-electric-green'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      value: '+91 98765 43210',
+      value: '93254 46359',
       description: 'Available during office hours',
       color: 'text-neon-blue'
     },

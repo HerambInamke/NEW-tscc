@@ -10,6 +10,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isScrolled = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [internalScrollState, setInternalScrollState] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
 
   // Handle scroll detection if no external scroll state is provided
@@ -26,6 +27,14 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled = false }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isScrolled]);
 
+  // Track viewport to ensure navbar is visible on mobile
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   const isNavbarScrolled = isScrolled !== undefined ? isScrolled : internalScrollState;
 
   const navItems = [
@@ -41,10 +50,10 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled = false }) => {
 
   return (
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: 0, opacity: 1 }}
       animate={{ 
-        y: isNavbarScrolled ? 0 : -100, 
-        opacity: isNavbarScrolled ? 1 : 0 
+        y: isMobile ? 0 : (isNavbarScrolled ? 0 : -100), 
+        opacity: isMobile ? 1 : (isNavbarScrolled ? 1 : 0) 
       }}
       transition={{ 
         duration: 0.4, 
@@ -53,16 +62,16 @@ const Navbar: React.FC<NavbarProps> = ({ isScrolled = false }) => {
         y: { duration: 0.4 }
       }}
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        isNavbarScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+        isNavbarScrolled || isMobile
+          ? 'bg-white/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent pointer-events-none'
       }`}
     >
       <motion.div 
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         animate={{ 
-          opacity: isNavbarScrolled ? 1 : 0,
-          y: isNavbarScrolled ? 0 : -10
+          opacity: isNavbarScrolled || isMobile ? 1 : 0,
+          y: isNavbarScrolled || isMobile ? 0 : -10
         }}
         transition={{ duration: 0.3, delay: isNavbarScrolled ? 0.1 : 0 }}
       >

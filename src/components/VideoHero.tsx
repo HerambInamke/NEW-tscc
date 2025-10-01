@@ -1,112 +1,70 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 
 const VideoHero: React.FC = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
-  const [currentVideoSrc, setCurrentVideoSrc] = useState('/NEW-TSCC-INRTO.mp4');
-  const [videoSources, setVideoSources] = useState([
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  // Multiple potential source paths to maximize compatibility across deployments
+  const [videoSources] = useState<string[]>([
     '/NEW-TSCC-INRTO.mp4',
     './NEW-TSCC-INRTO.mp4',
     'NEW-TSCC-INRTO.mp4',
     '/public/NEW-TSCC-INRTO.mp4'
   ]);
   const [currentSourceIndex, setCurrentSourceIndex] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
+  const currentVideoSrc = videoSources[currentSourceIndex];
+  const [showPlayOverlay, setShowPlayOverlay] = useState(false);
 
   // Handle video loading
   const handleVideoLoad = () => {
-    console.log('Video loaded successfully:', currentVideoSrc);
     setVideoLoaded(true);
   };
 
-  // Update video source when currentVideoSrc changes
+  // Try to autoplay once metadata is loaded (satisfies mobile autoplay policies)
   useEffect(() => {
-    if (videoRef.current && currentVideoSrc) {
-      videoRef.current.load();
-    }
-  }, [currentVideoSrc]);
-
-  // Check video availability on component mount
-  useEffect(() => {
-    const checkVideoAvailability = async () => {
-      console.log('Checking video availability...');
-      
-      for (let i = 0; i < videoSources.length; i++) {
-        try {
-          console.log(`Checking video source ${i + 1}/${videoSources.length}:`, videoSources[i]);
-          
-          // For local files, try a simple fetch
-          if (videoSources[i].startsWith('http')) {
-            // For external URLs, use HEAD request
-            const response = await fetch(videoSources[i], { 
-              method: 'HEAD',
-              mode: 'cors'
-            });
-            if (response.ok) {
-              console.log('✅ Video found at:', videoSources[i]);
-              setCurrentVideoSrc(videoSources[i]);
-              setCurrentSourceIndex(i);
-              return;
-            }
-          } else {
-            // For local files, try to load the video element
-            const testVideo = document.createElement('video');
-            testVideo.preload = 'metadata';
-            testVideo.crossOrigin = 'anonymous';
-            
-            const loadPromise = new Promise((resolve, reject) => {
-              testVideo.onloadedmetadata = () => resolve(true);
-              testVideo.onerror = () => reject(false);
-              testVideo.src = videoSources[i];
-            });
-            
-            const result = await loadPromise;
-            if (result) {
-              console.log('✅ Video found at:', videoSources[i]);
-              setCurrentVideoSrc(videoSources[i]);
-              setCurrentSourceIndex(i);
-              return;
-            }
-          }
-        } catch (error) {
-          console.log('❌ Video not found at:', videoSources[i], error);
-        }
-      }
-      
-      console.log('⚠️ No working video source found, will try fallback system');
-    };
-
-    checkVideoAvailability();
+    const v = videoRef.current;
+    if (!v) return;
+    // Ensure inline playback attributes are present for mobile browsers
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
+    v.setAttribute('x5-playsinline', '');
   }, []);
 
-  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-    const target = e.target as HTMLVideoElement;
-    console.error('Video failed to load:', e);
-    console.error('Video source attempted:', currentVideoSrc);
-    console.error('Video error details:', {
-      error: target.error,
-      networkState: target.networkState,
-      readyState: target.readyState,
-      src: target.src,
-      currentSrc: target.currentSrc
-    });
-    
-    // Try next video source
-    const nextIndex = currentSourceIndex + 1;
-    if (nextIndex < videoSources.length) {
-      console.log(`Trying video source ${nextIndex + 1}/${videoSources.length}:`, videoSources[nextIndex]);
-      setCurrentSourceIndex(nextIndex);
-      setCurrentVideoSrc(videoSources[nextIndex]);
-      setVideoError(false);
-      setVideoLoaded(false);
-    } else {
-      console.error('All video sources failed to load');
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const tryPlay = async () => {
+      try {
+        await v.play();
+        setShowPlayOverlay(false);
+      } catch (e) {
+        // Autoplay blocked on some mobile browsers; show manual play overlay
+        setShowPlayOverlay(true);
+      }
+    };
+    const onLoadedMetadata = () => {
+      tryPlay();
+    };
+    v.addEventListener('loadedmetadata', onLoadedMetadata);
+    return () => v.removeEventListener('loadedmetadata', onLoadedMetadata);
+  }, []);
+
+  const handleVideoError = () => {
+    // Try next source if available
+    setVideoLoaded(false);
+    setShowPlayOverlay(false);
+    setCurrentSourceIndex((prev) => {
+      const next = prev + 1;
+      if (next < videoSources.length) {
+        // Switch to next source
+        return next;
+      }
+      // Exhausted all sources; show fallback
       setVideoError(true);
-      setVideoLoaded(false);
-    }
+      return prev;
+    });
   };
 
   const scrollToNext = () => {
@@ -132,7 +90,7 @@ const VideoHero: React.FC = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+      className="relative h-[70vh] sm:h-[85vh] md:h-screen w-full overflow-hidden flex items-center justify-center"
     >
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full">
@@ -143,21 +101,34 @@ const VideoHero: React.FC = () => {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
+          src={currentVideoSrc}
+          poster="/TSCC-Logo.png"
           onLoadedData={handleVideoLoad}
           onCanPlayThrough={handleVideoLoad}
           onError={handleVideoError}
           aria-label="TSCC Hero Background Video"
         >
-          {videoSources.map((src, index) => (
-            <source 
-              key={src} 
-              src={src} 
-              type="video/mp4" 
-            />
-          ))}
           Your browser does not support the video tag.
         </video>
+
+        {/* Tap-to-play overlay for mobile when autoplay is blocked */}
+        {showPlayOverlay && !videoError && (
+          <button
+            className="absolute inset-0 flex items-center justify-center z-10"
+            onClick={async () => {
+              const v = videoRef.current;
+              if (!v) return;
+              try {
+                await v.play();
+                setShowPlayOverlay(false);
+              } catch {}
+            }}
+            aria-label="Tap to play video"
+          >
+            <span className="px-6 py-3 rounded-full bg-black/60 text-white text-sm">Tap to play</span>
+          </button>
+        )}
         
         {/* Fallback background if video fails or is loading */}
         {(!videoLoaded || videoError) && (

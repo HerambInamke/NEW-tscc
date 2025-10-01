@@ -418,7 +418,7 @@ function Home() {
 
           {/* SDG Cards Container */}
           <div 
-            className="relative h-[600px] flex items-center justify-center"
+            className="relative h-[420px] sm:h-[520px] md:h-[600px] flex items-center justify-center"
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
