@@ -96,7 +96,7 @@ const VideoHero: React.FC = () => {
       <div className="absolute inset-0 w-full h-full">
         <video
           ref={videoRef}
-          className="w-full h-full object-cover"
+          className="w-full h-full video-hero-video object-contain md:object-cover"
           autoPlay
           muted
           loop

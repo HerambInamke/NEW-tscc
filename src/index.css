@@ -445,6 +445,8 @@ select:focus {
   }
   
   .video-hero-video {
+    /* Ensure full visibility of video on small screens */
+    object-fit: contain;
     object-position: center center;
   }
 }
